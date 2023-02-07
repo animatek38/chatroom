@@ -21,7 +21,8 @@ def broadcast(message):                                                 #broadca
 def handle(client):                                         
     while True:
         try:                
-            message = client.recv(1024)                                            #recieving valid messages from client
+            message = client.recv(1024)
+            print(message)                                            #recieving valid messages from client
             msg = message.decode().split(' ')
             if (msg[1] == '/ping'):
                 broadcast("[*] - TG TU EST GAY - [*]".encode())
