@@ -1,6 +1,6 @@
 import socket, threading, json
 
-host = ''                                                      #LocalHost
+host = '192.168.124.60'                                                      #LocalHost
 port = 7976                                                             #Choosing unreserved port
 
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)              #socket initialization
@@ -14,28 +14,29 @@ file = open('password.json')
 passwords = json.load(file)
 file.close()
 
-
 def broadcast(message):                                                 #broadcast function declaration
     for client in clients:
         client.send(message)
 
 def handle(client):                                         
     while True:
-        try:                                                            #recieving valid messages from client
-            message = client.recv(1024)
-            print(message)
-            broadcast(message)
+        try:                
+            message = client.recv(1024)                                            #recieving valid messages from client
+            msg = message.decode().split(' ')
+            if (msg[1] == '/ping'):
+                broadcast("[*] - TG TU EST GAY - [*]".encode())
+            else:
+                broadcast(message)
+
         except:                                                         #removing clients
             index = clients.index(client)
             clients.remove(client)
             client.close()
             nickname = nicknames[index]
-            broadcast('{} left!'.format(nickname).encode('ascii'))
+            broadcast('[*] - {} left!'.format(nickname).encode('ascii'))
             nicknames.remove(nickname)
             break
-
-
-
+        
 def receive():                                                          #accepting multiple clients
     while True:
         print('[INFO] : Server is running and listening ...')
@@ -50,7 +51,6 @@ def receive():                                                          #accepti
                 clients.append(client)
                 print("[NICK] : Nickname is '{}'".format(nickname))
                 aaaaaaaa = ("[" + nickname + "]" + " : {} joined!".format(nickname)).encode('ascii')
-                # client.send(clients)
                 broadcast(aaaaaaaa)
                 # client.send('[INFO] : Connected to server!'.encode('ascii'))
                 thread = threading.Thread(target=handle, args=(client,))

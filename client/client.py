@@ -1,6 +1,6 @@
 import socket, threading, sys
-ip = input('quelle address: ')
-nickname = input("[WELCOME] \nThe best command-line server \n\nChoose your nickname: ")
+ip = input('quelle adresse: ')
+nickname = input(" █───█─▄▀▀─█───▄▀▀─▄▀▀▄─█▄─▄█─▄▀▀ \n █───█─█───█───█───█──█─█▀▄▀█─█── \n █───█─█▀▀─█───█───█──█─█─▀─█─█▀▀\n █▄█▄█─█───█───█───█──█─█───█─█──\n ─▀─▀───▀▀──▀▀──▀▀──▀▀──▀───▀──▀▀\n\nThe best command-line server \n\nChoose your nickname: ")
 password = input("and your password: ")
 client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)      #socket initialization
 client.connect((ip, 7976))                             #connecting client to server
