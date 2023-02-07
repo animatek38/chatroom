@@ -1,6 +1,6 @@
 import socket, threading, json
 
-host = '192.168.1.13'                                                      #LocalHost
+host = ''                                                      #LocalHost
 port = 7976                                                             #Choosing unreserved port
 
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)              #socket initialization
