@@ -1,6 +1,6 @@
 import socket, threading, json
 
-host = '192.168.1.13'                                                      #LocalHost
+host = ''                                                      #LocalHost
 port = 7976                                                             #Choosing unreserved port
 
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)              #socket initialization
@@ -50,6 +50,7 @@ def receive():                                                          #accepti
                 clients.append(client)
                 print("[NICK] : Nickname is '{}'".format(nickname))
                 aaaaaaaa = ("[" + nickname + "]" + " : {} joined!".format(nickname)).encode('ascii')
+                # client.send(clients)
                 broadcast(aaaaaaaa)
                 # client.send('[INFO] : Connected to server!'.encode('ascii'))
                 thread = threading.Thread(target=handle, args=(client,))
