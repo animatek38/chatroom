@@ -2,16 +2,19 @@
 
 chatroom is a simple program that allow you to easily talk over the terminal in python
 
-# prerequisite:
+# ⚙️ Installation :
 
+Windows :
 
+* Download Python 3.10 or over **[Download here](https://www.python.org/downloads/)**
+* Download ZIP
+* Extract Archive
+* Open cmd or powershell in ChatRoom Directory
+* Run pip install -r requirement.txt
 
-PYTHON NEED TO BE INSTALLED
-
-and you need to run
 
 ```bash
-pip install colorama
+pip install -r requirement.txt
 ```
 
 or you can run the bat file for windows
