@@ -1,6 +1,6 @@
 import socket, threading, json
 
-host = '192.168.124.60'                                                      #LocalHost
+host = ''                                                      #LocalHost
 port = 7976                                                             #Choosing unreserved port
 
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)              #socket initialization
@@ -10,24 +10,51 @@ server.listen()
 clients = []
 nicknames = []
 
+BLACK=30
+RED=31
+GREEN=32
+YELLOW=33
+BLUE=34
+MAGENTA=35
+CYAN=36
+WHITE=37
+
+def color(text: str, textColor: int, bg: int):
+    bg = str(bg+10)
+    textColor = str(textColor)
+    result = '\x1b[0;'+textColor+';'+bg+'m' + text + '\x1b[0m'
+    return result
+
+
 file = open('password.json')
 passwords = json.load(file)
 file.close()
 
-def broadcast(message):                                                 #broadcast function declaration
+def logMessage(message):
+    f = open("log.log", 'a')
+    f.write((str(message)[1:].strip("'") + '\n'))
+    f.close()
+
+
+def broadcast(message):
+    print(message)
+    logMessage(message)
     for client in clients:
         client.send(message)
 
 def handle(client):                                         
     while True:
         try:                
-            message = client.recv(1024)
-            print(message)                                            #recieving valid messages from client
+            message = client.recv(1024)                               #recieving valid messages from client
             msg = message.decode().split(' ')
             if (msg[1] == '/ping'):
-                broadcast("[*] - TG TU EST GAY - [*]".encode())
-            else:
-                broadcast(message)
+                broadcast(color("[*] - TG TU EST GAY - [*]".encode(), RED, BLACK))
+            if(msg[1] == '/online'):
+                listOfUser = ('---------------------------------\nonline: ' + (str(nicknames).strip('[]').replace("'", '')) + '\n---------------------------------')
+                listOfUser = color(listOfUser, RED, BLACK)
+                broadcast(listOfUser.encode())
+                
+            broadcast(message)
 
         except:                                                         #removing clients
             index = clients.index(client)
