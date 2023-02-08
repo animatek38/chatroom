@@ -1,8 +1,5 @@
 # ChatRoom Project
 
-ChatRoom is a simple program that allow you to easily talk over the terminal in python
-
-
 # ⚙️ Installation :
 
 **Windows :**
@@ -13,14 +10,9 @@ ChatRoom is a simple program that allow you to easily talk over the terminal in 
 * Open cmd or powershell in ChatRoom Directory
 * Run **`pip install -r requirement.txt`**
 
-
  **Linux :**
 
-* `sudo apt update`
-* `sudo apt install python3 python3-pip git -y`
-* `cd ChatRoom/`
 * `pip3 install -r requirements.txt`
-
 
 # 🎁 Usage Client :
 
