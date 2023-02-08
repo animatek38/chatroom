@@ -13,22 +13,3 @@ pip install colorama
 ```
 
 or you can run the bat file for windows
-
-
-asd;lkjsadh fj
-
-as'd; as
-
-d';alksd 
-
-as;d 
-
-as';d 
-
-as;d 
-
-asd'; as
-
-'d; 
-
-a
