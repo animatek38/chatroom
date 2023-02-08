@@ -39,9 +39,9 @@ def handle(client):
             if (msg[1] == '/ping'):
                 broadcast(f'{Fore.RED}[*] - TG TU EST GAY - [*]'.encode())
             if(msg[1] == '/online'):
-                listOfUser = (f'{Fore.GREEN}---------------------------------\nONLINE: ' + (str(nicknames).strip('[]').replace("'", '')) + '\n---------------------------------')
-                listOfUser = (listOfUser)
+                listOfUser = (f'{Fore.GREEN}\n---------------------------------\nonline: ' + (str(nicknames).strip('[]').replace("'", '')) + '\n---------------------------------')
                 broadcast(listOfUser.encode())
+                broadcast('Online Count: {}\n'.format(len(clients)).encode('ascii'))
 
             print(message)
             broadcast(message)
