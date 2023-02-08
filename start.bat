@@ -1,2 +1,2 @@
-pip install colorama
-python ./client/client.py
+pip install -r requirement.txt
+pause
