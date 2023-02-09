@@ -23,7 +23,7 @@ file.close()
 
 def logMessage(message):
     now = datetime.datetime.now()
-    now_text = now.strftime("%Y-%m-%d %H:%M")
+    now_text = now.strftime("%Y-%m-%d %H:%M:%S,%f")
     f = open("log.log", 'a')
     f.write("[" +(str(now_text) + "] | " + str(message)[1:].strip("'") + '\n'))
     f.close()
