@@ -1,7 +1,8 @@
 import socket, threading, json, datetime
 from colorama import Fore, init
+from pythonping import ping
 
-host = ''                                                      #LocalHost
+host = '127.0.0.1'                                                      #LocalHost
 port = 7976                                                             #Choosing unreserved port
 
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)              #socket initialization
@@ -40,15 +41,17 @@ def handle(client):
             message = client.recv(1024)
             print(diff.total_seconds()*60*60)
             if diff.total_seconds()*60*60 > 0.25:
+                response_list = ping(host, size=32, count=3)
                 now = datetime.datetime.now()
                 msg = message.decode().split(' ')
                 last_message_per_user[client] = now
                 if (msg[1] == '/ping'):
-                    client.send(f'{Fore.RED}[*] - TG TU EST GAY - [*]{Fore.RESET}'.encode())
+                    client.send(f'{Fore.RED}[*] -' + str(response_list.rtt_avg).strip('[]') + f'- [*]{Fore.RESET}'.encode())
                 elif(msg[1] == '/online'):
-                    listOfUser = (f'{Fore.GREEN}\n---------------------------------\n[ONLINE]: ' + (str(nicknames).strip('[]').replace("'", '')) + '\n---------------------------------')
+                    listOfUser = (f'{Fore.GREEN}\n---------------------------------\n[ONLINE]: ' + (str(nicknames).strip('[]').replace("'", '')))
                     client.send(listOfUser.encode())
-                    client.send('[Online Count]: {}\n'.format(len(clients)).encode())
+                    client.send('\n[Online Count]: {}\n'.format(len(clients)).encode())
+                    client.send(f'---------------------------------{Fore.RESET}'.encode())
                 else:
                     now_text = now.strftime("%H:%M")
                     print(message)
