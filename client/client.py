@@ -1,6 +1,7 @@
 import socket, threading, sys, datetime
 from colorama import Fore
 from colorama import init
+from pythonping import ping
 init()
 
 
@@ -31,13 +32,18 @@ def write():
         if(msg != ''):
             now = datetime.datetime.now()
             now_text = now.strftime("%H:%M:%S")
-            message = f'{Fore.CYAN}[{nickname}]{Fore.RESET}: {msg}'
-            #last_msg_clean = message.split(" ")
-            #last_msg_clean.pop(0)
-            global last_message_sent
-            last_message_sent = message
-            print("\033[1A[\033[2K")
-            client.send(message.encode())
+            if(msg.lower() == '/ping'):
+                response_list = ping(ip, size=32, count=3)
+                # print(f'{Fore.RED}[*] -' + str(response_list.rtt_avg) + f'- [*]{Fore.RESET}')
+                print(str(response_list.rtt_avg_ms))
+            else:
+                message = f'{Fore.CYAN}[{nickname}]{Fore.RESET}: {msg}'
+                #last_msg_clean = message.split(" ")
+                #last_msg_clean.pop(0)
+                global last_message_sent
+                last_message_sent = message
+                print("\033[1A[\033[2K")
+                client.send(message.encode())
 
 def receive():
     while True:                                                 #making valid connection

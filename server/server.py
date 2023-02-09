@@ -1,8 +1,7 @@
 import socket, threading, json, datetime
 from colorama import Fore, init
-from pythonping import ping
 
-host = '127.0.0.1'                                                      #LocalHost
+host = ''
 port = 7976                                                             #Choosing unreserved port
 
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)              #socket initialization
@@ -21,6 +20,8 @@ file = open('password.json')
 passwords = json.load(file)
 file.close()
 
+
+#log to a file
 def logMessage(message):
     now = datetime.datetime.now()
     now_text = now.strftime("%Y-%m-%d %H:%M:%S")
@@ -28,30 +29,34 @@ def logMessage(message):
     f.write("[" +(str(now_text) + "] | " + str(message)[1:].strip("'") + '\n'))
     f.close()
 
+
+#send message to client
 def broadcast(message):   
-    logMessage(message)                                             #broadcast function declaration
+    logMessage(message)
     for client in clients:
         client.send(message)
 
+
+#receive message
 def handle(client):                                         
     while True:
         try:    
             now = datetime.datetime.now() 
-            diff = now - last_message_per_user[client]                                                #recieving valid messages from client
+            diff = now - last_message_per_user[client]
             message = client.recv(1024)
+            #anti spam system
             print(diff.total_seconds()*60*60)
             if diff.total_seconds()*60*60 > 0.25:
-                response_list = ping(host, size=32, count=3)
                 now = datetime.datetime.now()
                 msg = message.decode().split(' ')
                 last_message_per_user[client] = now
-                if (msg[1] == '/ping'):
-                    client.send(f'{Fore.RED}[*] -' + str(response_list.rtt_avg).strip('[]') + f'- [*]{Fore.RESET}'.encode())
-                elif(msg[1] == '/online'):
+                
+                if(msg[1] == '/online'):
                     listOfUser = (f'{Fore.GREEN}\n---------------------------------\n[ONLINE]: ' + (str(nicknames).strip('[]').replace("'", '')))
                     client.send(listOfUser.encode())
                     client.send('\n[Online Count]: {}\n'.format(len(clients)).encode())
                     client.send(f'---------------------------------{Fore.RESET}'.encode())
+                    
                 else:
                     now_text = now.strftime("%H:%M")
                     print(message)
@@ -70,8 +75,8 @@ def handle(client):
             break
 
 
-
-def receive():                                                          #accepting multiple clients
+#link client with server at the start
+def receive():
     while True:
         print('[' + str(now_text) + ']' + '[INFO]: Server is running and listening ...')
         client, address = server.accept()
@@ -79,6 +84,7 @@ def receive():                                                          #accepti
         client.send('NICKNAME'.encode())
         nickname = client.recv(1024).decode()
         password = client.recv(1024).decode()
+        #password system here
         if(nickname in passwords):
             if(passwords[nickname] == password):
                 nicknames.append(nickname)
