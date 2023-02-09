@@ -1,6 +1,5 @@
 import socket, threading, json, datetime
-from colorama import Fore
-from colorama import init
+from colorama import Fore, init
 
 host = ''                                                      #LocalHost
 port = 7976                                                             #Choosing unreserved port
