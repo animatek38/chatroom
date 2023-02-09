@@ -6,7 +6,7 @@
 * Download ZIP
 * Extract Archive
 * Open cmd or powershell in ChatRoom Directory
-* Run **`pip install -r requirement.txt`**
+* Run **`pip install -r requirements.txt`**
 
 # 🎁 Usage Client :
 
