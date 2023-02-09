@@ -35,7 +35,7 @@ def write():
             if(msg.lower() == '/ping'):
                 response_list = ping(ip, size=32, count=3)
                 # print(f'{Fore.RED}[*] -' + str(response_list.rtt_avg) + f'- [*]{Fore.RESET}')
-                print(str(response_list.rtt_avg_ms))
+                print(f'{Fore.CYAN}[*] The ping is: {Fore.RESET}{Fore.YELLOW}' + str(response_list.rtt_avg_ms) + f' ms{Fore.RESET}')
             else:
                 message = f'{Fore.CYAN}[{nickname}]{Fore.RESET}: {msg}'
                 #last_msg_clean = message.split(" ")
