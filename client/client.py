@@ -1,4 +1,4 @@
-import socket, threading, sys, datetime
+import socket, threading, sys, datetime, sys, msvcrt
 from colorama import Fore, init
 from pythonping import ping
 init()
@@ -23,7 +23,9 @@ password = input(f"{Fore.CYAN} Password:{Fore.RESET} ")
 client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)      #socket initialization
 client.connect((ip, 7976))       
 
-last_message_sent = ""         #connecting client to server
+last_message_sent = ""  
+
+current_message = ""      #connecting client to server
 
 def write():
     while True:
@@ -43,11 +45,10 @@ def write():
                 #last_msg_clean.pop(0)
                 global last_message_sent
                 last_message_sent = message
-                print("\033[1A[\033[2K")
                 client.send(message.encode())
 
 def receive():
-    while True:                                                 #making valid connection
+    while True:                                                #making valid connection
         try:
             message = client.recv(1024).decode()
             if message == 'NICKNAME':
