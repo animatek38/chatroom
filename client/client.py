@@ -45,6 +45,10 @@ def write():
                 #last_msg_clean.pop(0)
                 global last_message_sent
                 last_message_sent = message
+                remove_txt = ""
+                for i in range(len(message)):
+                    remove_txt = remove_txt + " "
+                print ("\033[A" + remove_txt + "\033[A")
                 client.send(message.encode())
 
 def receive():
