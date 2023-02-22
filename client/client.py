@@ -14,6 +14,7 @@ print(rf"""{Fore.GREEN}
                              | Created by animatek#7217
                              |            yourSUS#3956
                              |            fri2cool#4192
+                             |            Augustin#0693
                             
 {Fore.RESET}""")
 
@@ -45,6 +46,13 @@ def write():
                 #last_msg_clean.pop(0)
                 global last_message_sent
                 last_message_sent = message
+<<<<<<< HEAD
+=======
+                remove_txt = ""
+                for i in range(len(message)):
+                    remove_txt = remove_txt + " "
+                print ("\033[A" + remove_txt + "\033[A")
+>>>>>>> c294f69edf8a84a46a582aa609b25e9d73de76c2
                 client.send(message.encode())
 
 def receive():
