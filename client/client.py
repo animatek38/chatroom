@@ -1,6 +1,10 @@
-import socket, threading, sys, datetime, sys, msvcrt
+import socket, threading, sys, datetime, sys
 from colorama import Fore, init
 from pythonping import ping
+if(sys.platform == "win32"):
+    import msvcrt
+else:
+    print("idk how to make it for linux maybe one day i'll work on it")
 init()
 
 
