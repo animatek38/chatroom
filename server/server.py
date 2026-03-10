@@ -44,7 +44,7 @@ def handle(client):
                 msg = message.decode().split(' ')
                 last_message_per_user[client] = datetime.datetime.timestamp(datetime.datetime.now())
                 if (msg[1] == '/ping'):
-                    client.send(f'{Fore.RED}[*] - TG TU EST GAY - [*]'.encode())
+                    client.send(f'{Fore.RED}[*] - A - [*]'.encode())
                 elif(msg[1] == '/online'):
                     listOfUser = (f'{Fore.GREEN}\n---------------------------------\nonline: ' + (str(nicknames).strip('[]').replace("'", '')) + '\n---------------------------------')
                     client.send(listOfUser.encode())
